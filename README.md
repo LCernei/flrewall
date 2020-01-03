@@ -26,6 +26,8 @@ python -m venv .venv
 pip install -r requirements.txt
 flask run --host=0.0.0.0
 ```
+Open the browser at http://localhost:5000/
+
 ### Linux:
 Open terminal
 ```
@@ -40,3 +42,7 @@ Edit the `.flaskenv` file: replace `mypassword` with your sudo password.
 ```
 flask run --host=0.0.0.0
 ```
+Open the browser at http://localhost:5000/
+
+## Screenshots
+![Image of Yaktocat](index.png)
