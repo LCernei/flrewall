@@ -1,0 +1,15 @@
+{
+    "q": {
+        "password_hash": "pbkdf2:sha256:150000$KKPE7yY1$205bdbf20bb804ef6fb159d57dbd06b6ca3221e0c7477f7e1573c1a63bd871a7",
+        "blocked_domains": [
+            "utm.md",
+            "protv.ro"
+        ]
+    },
+    "w": {
+        "password_hash": "pbkdf2:sha256:150000$Cw205oxX$4a67560d4a48a83f7339d9b2fa105773eb5811f4a290c6ad90fc65740beb5d52",
+        "blocked_domains": [
+            "asd.asd"
+        ]
+    }
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<h1>Hi, {{ current_user.username }}!</h1>
+{% if form %}
+<div class="row">
+    <div class="col-md-12">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+<br>
+{% endif %}
+
+<h4>Already blocked:</h4>
+<div class="list-group">
+    {% for domain in domains %}
+
+    <a href="https://www.{{domain}}" class="list-group-item list-group-item-action">{{domain}}
+        <form method="post" action="/delete/{{domain}}" class="pull-right">
+            <button type="submit" class="close" aria-label="Remove">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </form>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
