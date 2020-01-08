@@ -89,7 +89,7 @@ def register():
         data = {}
         with open('data.json') as json_file:
             data = json.load(json_file)
-        data[form.username.data] = {'password_hash':user.password_hash, 'blocked_domains':[]}
+        data[form.username.data] = {'stored_password':user.stored_password, 'blocked_domains':[]}
         with open('data.json', 'w') as json_file:
             json.dump(data, json_file)
         

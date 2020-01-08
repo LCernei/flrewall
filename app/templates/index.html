@@ -16,7 +16,7 @@
 <div class="list-group">
     {% for domain in domains %}
 
-    <a href="https://www.{{domain}}" class="list-group-item list-group-item-action">{{domain}}
+    <a href="https://www.{{domain}}" class="list-group-item list-group-item-action" target="_blank">{{domain}}
         <form method="post" action="/delete/{{domain}}" class="pull-right">
             <button type="submit" class="close" aria-label="Remove">
                 <span aria-hidden="true">&times;</span>

@@ -4,23 +4,27 @@ from time import time
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, login
+from itertools import cycle
+import base64
 import json
 
 
 class User(UserMixin):
 
     username = ""
-    password_hash = ""
+    stored_password = ""
     blocked_domains = []
     
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.stored_password = xor_crypt_string(password, encode=True)
+        # self.stored_password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return self.stored_password == xor_crypt_string(password, encode=True)
+        # return check_password_hash(self.stored_password, password)
 
     def get_id(self):
         return self.username
@@ -32,7 +36,7 @@ class User(UserMixin):
             if username in data.keys():
                 user = User()
                 user.username = username
-                user.password_hash = data[username]['password_hash']
+                user.stored_password = data[username]['stored_password']
                 user.blocked_domains = data[username]['blocked_domains']
                 return user
             else:
@@ -41,3 +45,11 @@ class User(UserMixin):
 @login.user_loader
 def load_user(id):
     return User.get(id)
+
+def xor_crypt_string(data, key='my_secret_key', encode=False, decode=False):
+    if decode:
+        data = base64.decodestring(data)
+    xored = ''.join(chr(ord(x) ^ ord(y)) for (x,y) in zip(data, cycle(key)))
+    if encode:
+        return base64.encodestring(xored.encode("utf-8")).decode('ascii')
+    return xored
